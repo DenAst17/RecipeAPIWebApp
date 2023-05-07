@@ -17,8 +17,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     using var context = scope.ServiceProvider.GetRequiredService<RecipeAPIContext>();
-    context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
+    context.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.
@@ -30,6 +29,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseRouting();

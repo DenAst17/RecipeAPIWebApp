@@ -10,11 +10,11 @@ namespace RecipeAPIWebApp.Models
         public virtual DbSet<Recipe> Recipes { get; set; }
         public virtual DbSet<Like> Like { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-97Q88N1;Database=RecipeDB; Trusted_Connection=True; TrustServerCertificate=True");
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.ClientCascade;
